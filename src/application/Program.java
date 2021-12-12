@@ -33,10 +33,12 @@ public class Program {
 		}
 		
 		
-		 System.out.println("\n=== - TESTE 04: Insert - ==="); Seller sellerInsert =
-		 new Seller(null, "Greg", "Greg@gmail.com" , new Date(), 4000.00, new
-		 Department(2, null)); sellerDao.insert(sellerInsert);
-		 System.out.println("Inserido! novo id: " + sellerInsert.getId());
+		/*
+		 * System.out.println("\n=== - TESTE 04: Insert - ==="); Seller sellerInsert =
+		 * new Seller(null, "Greg", "Greg@gmail.com" , new Date(), 4000.00, new
+		 * Department(2, null)); sellerDao.insert(sellerInsert);
+		 * System.out.println("Inserido! novo id: " + sellerInsert.getId());
+		 */
 		
 		
 		System.out.println("\n=== - TESTE 05: FindByAll - ===");
@@ -48,5 +50,7 @@ public class Program {
 		
 		System.out.println(seller);
 		
+		System.out.println("\n=== - TESTE 05: FindByAll - ===");
+		sellerDao.deleteById(10);
 	}
 }
