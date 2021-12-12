@@ -25,14 +25,71 @@ public class SellerDaoJDBC implements SellerDao {
 	}
 
 	@Override
-	public void insert(Seller depar) {
-		// TODO Auto-generated method stub
-
+	public void insert(Seller objSeller) {
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+		String sql = "INSERT INTO seller "
+				+ "(Name, Email, BirthDate, BaseSalary, DepartmentId) "
+				+ "VALUES "
+				+ "(?, ?, ?, ?, ?);";
+		
+		try {
+			stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			stmt.setString(1, objSeller.getName());
+			stmt.setString(2, objSeller.getEmail());
+			stmt.setDate(3, new java.sql.Date(objSeller.getBirthDate().getTime()));
+			stmt.setDouble(4, objSeller.getBaseSalary());
+			stmt.setInt(5, objSeller.getDepartmente().getId());
+			
+			int linhasAfetadas = stmt.executeUpdate();
+			
+			if (linhasAfetadas > 0) {
+				rs = stmt.getGeneratedKeys();
+				if (rs.next()) {
+					int id = rs.getInt(1);
+					objSeller.setId(id);
+				}
+			}
+			else {
+				throw new DbException("Erro inesperado. Nenhuma linha afetada");
+			}
+		} catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatement(stmt);
+			DB.closeResultSet(rs);
+		}
 	}
 
 	@Override
-	public void update(Seller depar) {
-		// TODO Auto-generated method stub
+	public void update(Seller objSeller) {
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+		String sql = "UPDATE seller SET "
+				+ "Name = ?, Email = ?, BirthDate = ?, BaseSalary = ?"
+				+ ", DepartmentId = ? WHERE Id = ?";
+		
+		try {
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, objSeller.getName());
+			stmt.setString(2, objSeller.getEmail());
+			stmt.setDate(3, new java.sql.Date(objSeller.getBirthDate().getTime()));
+			stmt.setDouble(4, objSeller.getBaseSalary());
+			stmt.setInt(5, objSeller.getDepartmente().getId());
+			stmt.setInt(6, objSeller.getId());
+			
+			stmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatement(stmt);
+			DB.closeResultSet(rs);
+		}
 
 	}
 
