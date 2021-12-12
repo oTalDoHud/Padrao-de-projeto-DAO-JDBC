@@ -14,7 +14,7 @@ void insert (Seller depar);
 	
 	Seller findById (Integer id);
 	
-	List<Seller> findAll ();
+	List<Seller> findAll (String organizacao);
 	
 	List<Seller> findByDepartment (Integer id);
 
