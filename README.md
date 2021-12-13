@@ -1,4 +1,4 @@
-# Xadrez em Java
+# JDBC em Java
 ![GitHub](https://img.shields.io/github/license/oTalDoHud/SistemaJogoXadrez-Java?style=for-the-badge)
 
 # Sobre o projeto
