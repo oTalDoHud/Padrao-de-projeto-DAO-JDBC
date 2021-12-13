@@ -1,15 +1,16 @@
 package application;
 
-import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 
+import db.DB;
 import model.dao.DaoFactory;
 import model.dao.SellerDao;
-import model.entities.Department;
 import model.entities.Seller;
 
 public class Program {
 	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
 		
 		SellerDao sellerDao = DaoFactory.createSellerDao();
 		
@@ -25,7 +26,7 @@ public class Program {
 			System.out.println(x);
 		}
 		
-		System.out.println("\n=== - TESTE 03: FindByAll - ===");
+		System.out.println("\n=== - TESTE 03: FindAll - ===");
 		List<Seller> listAll = sellerDao.findAll("Name");
 		
 		for (Seller x: listAll) {
@@ -41,7 +42,7 @@ public class Program {
 		 */
 		
 		
-		System.out.println("\n=== - TESTE 05: FindByAll - ===");
+		System.out.println("\n=== - TESTE 05: Update - ===");
 		seller = sellerDao.findById(1);
 		System.out.println(seller);
 		
@@ -50,7 +51,11 @@ public class Program {
 		
 		System.out.println(seller);
 		
-		System.out.println("\n=== - TESTE 05: FindByAll - ===");
-		sellerDao.deleteById(10);
+		System.out.println("\n=== - TESTE 06: Delete - ===");
+		int id = 10;
+		sellerDao.deleteById(id);
+		System.out.println("O vendedor id: " + id + "Foi excluido com sucesso!");
+		DB.closeConnection();
+		sc.close();
 	}
 }
